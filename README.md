@@ -74,5 +74,7 @@ patch -p0 < scripts/qsys.patch
 
 After successful compilation and the "make generate_hex" step I had to copy the generated .hex (`software/sys_controller/mem_init/sys_onchip_memory2_0.hex`) manually to `sys/synthesis/submodules/` and follow the steps from the NOTE section under "Building RTL (bitstream)".
 
+Thanks to ikari01 for figuring this out.
+
 ## License
 MIT License
