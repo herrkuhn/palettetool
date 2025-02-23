@@ -1,7 +1,5 @@
 # PaletteTool
 
-# PaletteTool
-
 PaletteTool is a command-line tool for converting and visualizing color palettes. It helps convert `.pal` files for OSSC firmware and create BMP previews.
 
 ## Features
