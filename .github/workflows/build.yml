@@ -1,0 +1,79 @@
+name: Build Native Executables
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Build Native - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            executable: palettetool
+            zip_name: palettetool-linux.zip
+            renamed_executable: palettetool
+          - os: windows-latest
+            executable: palettetool.exe
+            zip_name: palettetool-windows.zip
+            renamed_executable: palettetool.exe
+          - os: macos-latest
+            executable: palettetool
+            zip_name: palettetool-macos.zip
+            renamed_executable: palettetool
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up GraalVM
+      uses: graalvm/setup-graalvm@v1
+      with:
+        java-version: '21'
+        distribution: 'graalvm'
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        native-image-job-reports: 'true'
+
+    - name: Build Native Image
+      run: mvn -Pnative clean package native:build
+
+    - name: Prepare Zip (Unix)
+      if: matrix.os != 'windows-latest'
+      run: |
+        mkdir dist
+        cp target/${{ matrix.executable }} dist/${{ matrix.renamed_executable }}
+        chmod +x dist/${{ matrix.renamed_executable }}
+        cd dist
+        zip -r ../${{ matrix.zip_name }} .
+        cd ..
+
+    - name: Prepare Zip (Windows)
+      if: matrix.os == 'windows-latest'
+      shell: pwsh
+      run: |
+        New-Item -ItemType Directory -Path dist
+        Copy-Item target\${{ matrix.executable }} dist\${{ matrix.renamed_executable }}
+        Compress-Archive -Path dist\* -DestinationPath ${{ matrix.zip_name }}
+      
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.zip_name }}
+        path: ${{ matrix.zip_name }}
+        
+    - name: Upload Release Asset
+      if: github.event_name == 'release'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ${{ matrix.zip_name }}
+        asset_name: ${{ matrix.zip_name }}
+        asset_content_type: application/zip
