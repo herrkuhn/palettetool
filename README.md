@@ -28,22 +28,22 @@ mvn clean package
 ## Usage
 
 ```sh
-java -jar PaletteTool.jar <command> <input file> [output file]
+java -jar palettetool-jar-with-dependencies.jar <command> <input file> [output file]
 ```
 
 ### Commands
 
 - Convert `.pal` to `.vh`:
   ```sh
-  java -jar PaletteTool.jar tovh input.pal [output.vh]
+  java -jar palettetool-jar-with-dependencies.jar tovh input.pal [output.vh]
   ```
 - Convert `.vh` to `.pal`:
   ```sh
-  java -jar PaletteTool.jar topal input.vh [output.pal]
+  java -jar palettetool-jar-with-dependencies.jar topal input.vh [output.pal]
   ```
 - Create BMP preview:
   ```sh
-  java -jar PaletteTool.jar tobmp input.pal [output.bmp]
+  java -jar palettetool-jar-with-dependencies.jar tobmp input.pal [output.bmp]
   ```
 
 ## File Formats
@@ -55,9 +55,9 @@ java -jar PaletteTool.jar <command> <input file> [output file]
 
 Convert and preview a palette:
 ```sh
-java -jar PaletteTool.jar tovh example.pal
-java -jar PaletteTool.jar topal example.pal
-java -jar PaletteTool.jar tobmp example.vh
+java -jar palettetool-jar-with-dependencies.jar tovh example.pal
+java -jar palettetool-jar-with-dependencies.jar topal example.pal
+java -jar palettetool-jar-with-dependencies.jar tobmp example.vh
 ```
 
 ## OSSC Compilation
