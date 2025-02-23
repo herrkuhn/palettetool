@@ -11,7 +11,7 @@ PaletteTool is a command-line tool for converting and visualizing color palettes
 
 ## Installation
 
-Binaries for Linux, OSX and Windows are provided with each [Release](releases). Additionally every commit triggers a build under [Actions](actions), artefacts are at the bottom of each workflow.
+Binaries for Linux, OSX and Windows are provided with each [Release](/releases). Additionally every commit triggers a build under [Actions](/actions), artefacts are at the bottom of each workflow.
 
 Here's how to build from source:
 
