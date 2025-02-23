@@ -56,8 +56,8 @@ java -jar palettetool-jar-with-dependencies.jar <command> <input file> [output f
 Convert and preview a palette:
 ```sh
 java -jar palettetool-jar-with-dependencies.jar tovh example.pal
-java -jar palettetool-jar-with-dependencies.jar topal example.pal
-java -jar palettetool-jar-with-dependencies.jar tobmp example.vh
+java -jar palettetool-jar-with-dependencies.jar topal example.vh
+java -jar palettetool-jar-with-dependencies.jar tobmp example.vh/.pal
 ```
 
 ## OSSC Compilation
