@@ -8,6 +8,10 @@ on:
   release:
     types: [created]
 
+# Add permissions block at the top level
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build Native - ${{ matrix.os }}
@@ -69,11 +73,8 @@ jobs:
         
     - name: Upload Release Asset
       if: github.event_name == 'release'
-      uses: actions/upload-release-asset@v1
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ${{ matrix.zip_name }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ${{ matrix.zip_name }}
-        asset_name: ${{ matrix.zip_name }}
-        asset_content_type: application/zip
