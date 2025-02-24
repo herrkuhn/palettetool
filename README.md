@@ -26,24 +26,25 @@ mvn clean package
 ```
 
 ## Usage
+This is for the binary [release](https://github.com/herrkuhn/palettetool/releases) artefacts.
 
 ```sh
-java -jar palettetool-jar-with-dependencies.jar <command> <input file> [output file]
+palettetool <command> <input file> [output file]
 ```
 
 ### Commands
 
 - Convert `.pal` to `.vh`:
   ```sh
-  java -jar palettetool-jar-with-dependencies.jar tovh input.pal [output.vh]
+  palettetool tovh input.pal [output.vh]
   ```
 - Convert `.vh` to `.pal`:
   ```sh
-  java -jar palettetool-jar-with-dependencies.jar topal input.vh [output.pal]
+  palettetool topal input.vh [output.pal]
   ```
 - Create BMP preview:
   ```sh
-  java -jar palettetool-jar-with-dependencies.jar tobmp input.pal [output.bmp]
+  palettetool tobmp input.pal [output.bmp]
   ```
 
 ## File Formats
@@ -55,9 +56,9 @@ java -jar palettetool-jar-with-dependencies.jar <command> <input file> [output f
 
 Convert and preview a palette:
 ```sh
-java -jar palettetool-jar-with-dependencies.jar tovh example.pal
-java -jar palettetool-jar-with-dependencies.jar topal example.vh
-java -jar palettetool-jar-with-dependencies.jar tobmp example.vh/.pal
+palettetool tovh example.pal
+palettetool topal example.vh
+palettetool tobmp example.vh/.pal
 ```
 
 ## OSSC Compilation
